@@ -2,7 +2,7 @@
   <div>
     <header class="jobname min414">Web前端工程师 - {{resume.name}}</header>
     <h1 class="title">个人信息<span class="max414">-&nbsp;&nbsp;Web前端工程师</span></h1>
-    <div class="avatar"><img :src="resume.avatar_url" alt=""></div>
+    <div class="avatar" style="background-image:url(http://cdn.lintaohai.xyz/avatar.jpeg);"></div>
     <div class="flex-box">
       <section class="flex-item">
         <div class="max414"><span class="tag"></span> {{resume.name}} | {{resume.age}} | 汉族 | {{resume.hukou}}</div>
@@ -33,33 +33,18 @@
       </section> 
     </div>
     <!--  -->
-    <!-- {<h1 class="title">项目经验</h1>
-    <div class="flex-box">
-      <section class="flex-item">
-        <div><span class="tag"></span> ABC 公司 （ 2015 年 5 月 ~ 至今 ）</div>
-      </section>
-      <section class="flex-item">
-        <div>
-          <h1 class="product">DEF 项目</h1>
-          <p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-        </div>
-      </section>
-    </div> -->
-    <!--  -->
     <h1 class="title">工作经验</h1>
     <div class="flex-box" v-for="(item, index) in resume.pro" :key=index>
       <section class="flex-item">
         <div class="company"><span class="tag">
-          </span> ABC 公司 （ {{item.job_time}} ）
+          </span> {{item.name}} （ {{item.job_time}} ）
           <div>{{item.company}}</div>
         </div>
       </section>
       <section class="flex-item" v-for="(pro, sindex) in item.projects" :key=sindex>
         <div>
-          <div>
             <!-- <h1 class="product">项目{{sindex | proItem}}：&nbsp;&nbsp;&nbsp;&nbsp;{{pro.name}}</h1> -->
-            <p>项目描述：&nbsp;{{pro.proj}}</p>
-          </div>
+          <p>项目描述：&nbsp;{{pro.proj}}</p>
           <div><p v-for="(duty, dindex) in pro.duty" :key="dindex">{{duty}}</p></div>
         </div>
       </section>
@@ -81,7 +66,7 @@ export default {
     }
   },
   created () {
-    this.$http.get('http://www.lintaohai.xyz:9000/admin/v1/resume/7458')
+    this.$http.get('https://www.lintaohai.xyz/admin/v1/resume/7458')
     .then(res => {
       let data = res.data
       this.resume = data
@@ -156,11 +141,12 @@ body {
   position: absolute;
   top: 20px;
   right: 50px;
-  img {
-    border: 1px solid #fb8a46;
-    width: 100px;
-    height: 120px;
-  }
+  width: 100px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  border: 1px solid #ddd;
 }
 
 @media screen and (max-width: 700px) {
@@ -171,11 +157,9 @@ body {
   .avatar{
     top: 30px;
     right: 10px;
-    img {
-      width: 60px;
-      height: auto;
-      border-radius: 50%;
-    }
+    width: 60px;
+    height: 70px;
+    // border-radius: 50%;
   }
   .title{
     padding: 10px 0;
